@@ -1,0 +1,28 @@
+
+th,td{
+    text-align: center;
+}
+th{
+    background-color:#422956;
+    color: white;
+}
+.tbl1
+{
+    width: 300px;
+}
+.tbl2
+{
+    width: 400pxx;
+}
+.gridNomeGrandes
+{
+    width: 200px;
+}
+.gridNomeMedio
+{
+    width: 150px;
+}
+.gridNomePequeno
+{
+    width: 90px;
+}

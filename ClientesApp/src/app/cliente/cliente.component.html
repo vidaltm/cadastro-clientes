@@ -1,0 +1,132 @@
+<div class="container"> 
+    <mat-card> 
+      <mat-toolbar color="primary"> 
+        <div align="center" style="color:white;text-align: right;"> 
+          Cadastro Clientes
+        </div>   
+      </mat-toolbar> 
+    <br><br> 
+      <mat-card-content> 
+        <form [formGroup]="clienteForm"(ngSubmit)="onFormSubmit()"> 
+                <table> 
+                  <tr> 
+                    <td class="tbl1"> 
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Nome" matTooltip="Informe o nome do Cliente" matInput placeholder="Nome do cliente"> 
+                      </mat-form-field> 
+                      <mat-error> 
+                        <span *ngIf="!clienteForm.get('Nome').value && clienteForm.get('Nome').touched"></span> 
+                      </mat-error> 
+                    </td> 
+                    <td class="tbl1"> 
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="DataNascimento" matTooltip="Informe a data de nascimento" matInput placeholder="Data nascimento">                         
+                      </mat-form-field> 
+                      <mat-error> 
+                        <span *ngIf="!clienteForm.get('DataNascimento').value && clienteForm.get('DataNascimento').touched"></span> 
+                      </mat-error> 
+                    </td>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Sexo" matTooltip="Informe o Sexo" matInput placeholder="Sexo"> 
+                          </mat-form-field> 
+                          <mat-error> 
+                            <span *ngIf="!clienteForm.get('Sexo').value && clienteForm.get('Sexo').touched"></span> 
+                          </mat-error> 
+                      </td>
+                  </tr>
+                  <tr>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Cep" matTooltip="Informe o Cep" matInput ui-br-cep-mask placeholder="Cep" (blur)="obterCep()"> 
+                          </mat-form-field>                           
+                      </td>
+                      <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Endereco" matTooltip="Informe o Endereço" matInput placeholder="Endereço"> 
+                          </mat-form-field>                           
+                      </td>
+                      <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Numero" matTooltip="Informe o Número" matInput type="number" placeholder="Número"> 
+                          </mat-form-field>                           
+                      </td>
+                  </tr> 
+                  <tr>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Complemento" matTooltip="Informe o Complemento" matInput placeholder="Complemento"> 
+                          </mat-form-field>                           
+                      </td>
+                      <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Bairro" matTooltip="Informe o Bairro" matInput placeholder="Bairro"> 
+                          </mat-form-field>                           
+                      </td>                      
+                  </tr>
+                  <tr>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Cidade" matTooltip="Informe o Cidade" matInput placeholder="Cidade"> 
+                          </mat-form-field>                           
+                      </td>
+                    <td class="tbl1">
+                        <mat-form-field class="demo-full-width"> 
+                            <input formControlName="Estado" matTooltip="Informe o Estado" matInput placeholder="Estado"> 
+                          </mat-form-field>                           
+                      </td>                      
+                  </tr>
+                  <tr> 
+                    <td></td> 
+                    <td  class="content-center"> 
+                      <button type="submit" mat-raised-button color="primary"matTooltip="Clique no botão Gravar"[disabled]="!clienteForm.valid">Gravar</button>                          
+                    </td> 
+                    <td  class="content-center">
+                        <button type="reset" mat-raised-button color="accent"matTooltip="Clique no botão Limpar" (click)="resetForm()">Limpar</button> 
+                    </td>
+                    <td> 
+                      <p *ngIf="dataSaved" style="color:rgb(55, 0, 128);font-size:20px;font-weight:bold" Class="success" align="left"> 
+                        {{message}} 
+                      </p> 
+                    </td> 
+                  </tr> 
+                </table> 
+           <br><br> 
+          <table class="table" > 
+              <tr ngclass="btn-primary"> 
+                <th class="gridNomeGrandes">Nome do Cliente</th> 
+                <th class="gridNomePequeno">Data</th>
+                <th class="gridNomePequeno">Sexo</th>
+                <th class="gridNomePequeno">Cep</th>
+                <th class="gridNomeGrandes">Endereço</th>
+                <th class="gridNomePequeno">Número</th>
+                <th class="gridNomeMedio">Complemento</th>
+                <th class="gridNomeMedio">Bairro</th>
+                <th class="gridNomeMedio">Cidade</th>
+                <th class="gridNomeMedio">Estado</th>
+                <th class="tbl2"></th> 
+                <th class="tbl2"></th> 
+              </tr> 
+              <tr *ngFor="let cliente of allClientes | async"> 
+                <td class="tbl2">{{cliente.nome}}</td> 
+                <td class="tbl2">{{cliente.dataNascimento}}</td>
+                <td class="tbl2">{{cliente.sexo}}</td>
+                <td class="tbl2">{{cliente.cep}}</td>
+                <td class="tbl2">{{cliente.endereco}}</td>
+                <td class="tbl2">{{cliente.numero}}</td>
+                <td class="tbl2">{{cliente.complemento}}</td>
+                <td class="tbl2">{{cliente.bairro}}</td>
+                <td class="tbl2">{{cliente.cidade}}</td>
+                <td class="tbl2">{{cliente.estado}}</td>
+                <td class="tbl2"> 
+                  <button type="button" mat-raised-button color="primary" matTooltip="Clique no botão para Editar"(click)="loadClienteToEdit(cliente.id)">Editar</button> 
+                </td> 
+                <td class="tbl2"> 
+                  <button type="button" mat-raised-button color="warn" matTooltip="Clique no botão para Deletar"(click)="deleteCliente(cliente.id)">Deletar</button> 
+                </td> 
+              </tr>    
+            </table> 
+        </form> 
+      </mat-card-content> 
+    </mat-card> 
+    </div>
